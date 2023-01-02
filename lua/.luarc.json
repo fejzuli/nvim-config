@@ -1,0 +1,32 @@
+{
+    "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+    "Lua.diagnostics.globals": [
+        "ngx"
+    ],
+    "Lua.runtime.version": "LuaJIT",
+    "Lua.workspace.library": [
+        "/home/merlin/.local/share/nvim/lazy/neodev.nvim/types/stable",
+        "/usr/share/nvim/runtime",
+        "/home/merlin/.local/share/nvim/lazy/telescope.nvim",
+        "/home/merlin/.local/share/nvim/lazy/mason.nvim",
+        "/home/merlin/.local/share/nvim/lazy/plenary.nvim",
+        "/home/merlin/.local/share/nvim/lazy/nvim-cmp",
+        "/home/merlin/.local/share/nvim/lazy/mason-lspconfig.nvim",
+        "/home/merlin/.local/share/nvim/lazy/cmp_luasnip",
+        "/home/merlin/.local/share/nvim/lazy/cmp-nvim-lsp",
+        "/home/merlin/.local/share/nvim/lazy/fidget.nvim",
+        "/home/merlin/.local/share/nvim/lazy/indent-blankline.nvim",
+        "/home/merlin/.local/share/nvim/lazy/LuaSnip",
+        "/home/merlin/.local/share/nvim/lazy/lazy.nvim",
+        "/home/merlin/.local/share/nvim/lazy/nvim-lspconfig",
+        "/home/merlin/.local/share/nvim/lazy/telescope-fzf-native.nvim",
+        "/home/merlin/.local/share/nvim/lazy/nvim-treesitter",
+        "/home/merlin/.local/share/nvim/lazy/nvim-treesitter-textobjects",
+        "/home/merlin/.local/share/nvim/lazy/neodev.nvim",
+        "/home/merlin/.local/share/nvim/lazy/nvim-noirbuddy",
+        "/home/merlin/.local/share/nvim/lazy/colorbuddy.nvim",
+        "/home/merlin/.local/share/nvim/lazy/which-key.nvim",
+        "${3rd}/luassert/library",
+        "${3rd}/OpenResty/library"
+    ]
+}
