@@ -1,6 +1,8 @@
 local wk = require('which-key')
 local ts = require('telescope.builtin')
 
+vim.keymap.set('i', 'jj', '<ESC>', { desc = 'Exit insert mode' }) -- exit insert mode on jj
+
 vim.keymap.set('n', '<C-s>', ':w<CR>', { desc = 'Save file' }) -- ctrl-s save in normal mode
 vim.keymap.set('i', '<C-s>', '<Esc>:w<CR>a', { desc = 'Save file' }) -- ctrl-s save in insert mode
 
@@ -23,21 +25,38 @@ vim.keymap.set( -- Toggle comment selection in visual mode
     { desc = 'Toggle comment over selection' }
 )
 
+-- open telescope file picker in nvim config dir
+local function open_nvim_config_file()
+    ts.find_files({
+        search_dirs = {
+            vim.fn.stdpath('config')
+        },
+    })
+end
+
 wk.register({ -- <Leader> mappings
-    q = { -- Quitting
-        name = 'quit',
-        q = { ':qa<CR>', 'Quit Nvim' },
-        Q = { ':qa!<CR>', 'Quit Nvim without saving' }
-    },
-    u = { -- Utilities
-        name = 'util',
-        c = { ':cd ~/.config/nvim<CR>:e init.lua<CR>', 'Change to config dir' },
-        l = { require('lazy/view').show, 'Lazy (plugin manager)' },
-        m = { require('mason/ui').open, 'Mason (LSP manager)' },
-    },
     [','] = { ts.buffers, 'Switch buffer' },
     ['.'] = { ts.find_files, 'Find file' },
     ['/'] = { ts.live_grep, 'Search in files' },
+    b = { -- Navigating buffers
+        name = 'buffer',
+        ['<Tab>'] = { '<C-^>', 'Quick switch' },
+        D = { 'bdelete!', 'Delete buffer without saving' },
+        n = { ':bnext<CR>', 'Next buffer' },
+        p = { ':bprev<CR>', 'Previous buffer' },
+        d = { ':confirm bdelete<CR>', 'Delete buffer' },
+    },
+    q = { -- Quitting
+        name = 'quit',
+        q = { ':confirm qall<CR>', 'Quit Nvim' },
+        Q = { ':qall!<CR>', 'Quit Nvim without saving' }
+    },
+    u = { -- Utilities
+        name = 'util',
+        c = { open_nvim_config_file, 'Open nvim config' },
+        l = { require('lazy/view').show, 'Lazy (plugin manager)' },
+        m = { require('mason/ui').open, 'Mason (LSP manager)' },
+    },
 }, { prefix = '<Leader>' })
 
 wk.register({
