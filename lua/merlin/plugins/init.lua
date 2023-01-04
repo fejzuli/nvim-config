@@ -33,6 +33,4 @@ return {
     'lukas-reineke/indent-blankline.nvim',
     -- quickly comment out code
     'numToStr/Comment.nvim',
-    -- REPL for lisps
-    'Olical/conjure',
 }
