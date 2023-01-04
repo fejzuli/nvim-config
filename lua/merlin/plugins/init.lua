@@ -1,4 +1,9 @@
 return {
+    { -- The lazy plugin manager used to manage all these
+        'folke/lazy.nvim',
+        tag = 'v7.8.0',
+        pin = true,
+    },
     { -- monochrome dark theme
         'jesseleite/nvim-noirbuddy',
         dependencies = { 'tjdevries/colorbuddy.nvim', branch = 'dev' },
