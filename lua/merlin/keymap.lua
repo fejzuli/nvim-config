@@ -6,6 +6,8 @@ vim.keymap.set('i', 'jj', '<ESC>', { desc = 'Exit insert mode' }) -- exit insert
 vim.keymap.set('n', '<C-s>', ':w<CR>', { desc = 'Save file' }) -- ctrl-s save in normal mode
 vim.keymap.set('i', '<C-s>', '<Esc>:w<CR>a', { desc = 'Save file' }) -- ctrl-s save in insert mode
 
+vim.keymap.set('n', '<C-f>', ts.current_buffer_fuzzy_find, { desc = 'Fuzzy find in current buffer' })
+
 vim.keymap.set( -- Toggle comment current line in normal mode
     'n',
     '<C-/>',
@@ -46,6 +48,10 @@ wk.register({ -- <Leader> mappings
         p = { ':bprev<CR>', 'Previous buffer' },
         d = { ':confirm bdelete<CR>', 'Delete buffer' },
     },
+    f = { -- Actions on files
+        name = 'file',
+        s = { ':w<CR>', 'Save file' },
+    },
     q = { -- Quitting
         name = 'quit',
         q = { ':confirm qall<CR>', 'Quit Nvim' },
@@ -58,8 +64,3 @@ wk.register({ -- <Leader> mappings
         m = { require('mason/ui').open, 'Mason (LSP manager)' },
     },
 }, { prefix = '<Leader>' })
-
-wk.register({
-    f = { ts.current_buffer_fuzzy_find, 'Fuzzy find' },
-    s = { ':w<CR>', 'Save buffer' },
-}, { prefix = '<LocalLeader>' })
