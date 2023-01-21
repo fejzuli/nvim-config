@@ -1,11 +1,9 @@
 local wk = require('which-key')
 local ts = require('telescope.builtin')
 
-vim.keymap.set('i', 'jj', '<ESC>', { desc = 'Exit insert mode' }) -- exit insert mode on jj
+vim.keymap.set('i', 'jj', '<ESC>', { desc = 'Exit insert mode' })
 
-vim.keymap.set('n', '<C-s>', ':w<CR>', { desc = 'Save file' }) -- ctrl-s save in normal mode
-vim.keymap.set('i', '<C-s>', '<Esc>:w<CR>a', { desc = 'Save file' }) -- ctrl-s save in insert mode
-
+-- TODO check if this is the best key to bind to
 vim.keymap.set('n', '<C-f>', ts.current_buffer_fuzzy_find, { desc = 'Fuzzy find in current buffer' })
 
 vim.keymap.set( -- Toggle comment current line in normal mode
@@ -27,40 +25,22 @@ vim.keymap.set( -- Toggle comment selection in visual mode
     { desc = 'Toggle comment over selection' }
 )
 
--- open telescope file picker in nvim config dir
-local function open_nvim_config_file()
-    ts.find_files({
-        search_dirs = {
-            vim.fn.stdpath('config')
-        },
-    })
-end
-
-wk.register({ -- <Leader> mappings
+wk.register({ -- <LEADER> mappings
     [','] = { ts.buffers, 'Switch buffer' },
     ['.'] = { ts.find_files, 'Find file' },
     ['/'] = { ts.live_grep, 'Search in files' },
-    b = { -- Navigating buffers
-        name = 'buffer',
-        ['<Tab>'] = { '<C-^>', 'Quick switch' },
-        D = { 'bdelete!', 'Delete buffer without saving' },
-        n = { ':bnext<CR>', 'Next buffer' },
-        p = { ':bprev<CR>', 'Previous buffer' },
-        d = { ':confirm bdelete<CR>', 'Delete buffer' },
-    },
-    f = { -- Actions on files
+    f = {
         name = 'file',
-        s = { ':w<CR>', 'Save file' },
+        s = { ':confirm update<CR>', 'Save file' },
     },
-    q = { -- Quitting
-        name = 'quit',
-        q = { ':confirm qall<CR>', 'Quit Nvim' },
-        Q = { ':qall!<CR>', 'Quit Nvim without saving' }
-    },
-    u = { -- Utilities
+    q = { ':confirm qall<CR>', 'Quit' },
+    u = {
         name = 'util',
-        c = { open_nvim_config_file, 'Open nvim config' },
-        l = { require('lazy/view').show, 'Lazy (plugin manager)' },
-        m = { require('mason/ui').open, 'Mason (LSP manager)' },
+        c = {
+            function() ts.find_files({ search_dirs = { vim.fn.stdpath('config') } }) end,
+            'Open nvim config'
+        },
+        l = { function() require('lazy/view').show() end, 'Lazy (plugin manager)' },
+        m = { function() require('mason/ui').open() end, 'Mason (LSP manager)' },
     },
-}, { prefix = '<Leader>' })
+}, { prefix = '<LEADER>' })
